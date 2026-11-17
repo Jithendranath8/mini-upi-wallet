@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini UPI Wallet</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/vendor/fonts/bricolage/index.css">
+  <link rel="stylesheet" href="/vendor/fonts/plex-sans/400.css">
+  <link rel="stylesheet" href="/vendor/fonts/plex-sans/500.css">
+  <link rel="stylesheet" href="/vendor/fonts/plex-sans/600.css">
+  <link rel="stylesheet" href="/vendor/fonts/plex-mono/400.css">
+  <link rel="stylesheet" href="/vendor/fonts/plex-mono/500.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="#wallet" aria-label="Mini UPI, go to wallet">
+      <svg viewBox="0 0 28 28" width="26" height="26" aria-hidden="true">
+        <circle cx="5" cy="14" r="3.5"></circle><circle cx="23" cy="14" r="3.5"></circle>
+        <path d="M8.5 14h11" stroke-width="2.5"></path>
+      </svg>
+      Mini UPI
+    </a>
+    <nav class="tabs" aria-label="Sections">
+      <a href="#wallet" data-view="wallet">Wallet</a>
+      <a href="#lab" data-view="lab">Scenario lab</a>
+      <a href="#system" data-view="system">Live system</a>
+      <a href="#ledger" data-view="ledger">Ledger</a>
+      <a href="#design" data-view="design">Design</a>
+    </nav>
+    <div class="who">
+      <label for="user-select">Signed in as</label>
+      <select id="user-select"></select>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============================== Wallet ============================== -->
+    <section id="view-wallet" class="view" hidden>
+      <div class="wallet-grid">
+        <aside class="col-account" aria-label="Your account">
+          <div class="balance-card">
+            <p class="balance-label">Wallet balance</p>
+            <p class="balance-amount" id="balance">&hellip;</p>
+            <p class="balance-upi" id="upi-id"></p>
+            <div class="balance-foot">
+              <span id="daily-limit"></span>
+              <button type="button" id="refresh-balance" class="on-dark">Refresh</button>
+            </div>
+          </div>
+
+          <h2>Payment sources</h2>
+          <ul id="sources" class="plain-list sources"></ul>
+
+          <details class="disclosure" id="topup-box">
+            <summary>Add money to wallet</summary>
+            <form id="topup-form" class="stack">
+              <label>From
+                <select name="sourceId" required></select>
+              </label>
+              <label>Amount in rupees
+                <input name="amount" type="number" min="1" step="0.01" inputmode="decimal" required>
+              </label>
+              <label>UPI PIN
+                <input name="pin" type="password" inputmode="numeric" autocomplete="off" maxlength="6" required>
+              </label>
+              <button class="primary">Add money</button>
+            </form>
+          </details>
+
+          <details class="disclosure">
+            <summary>Link a bank account</summary>
+            <form id="link-bank-form" class="stack">
+              <label>Bank name <input name="bankName" required maxlength="40" placeholder="HDFC Bank"></label>
+              <label>Account number <input name="accountNumber" required inputmode="numeric" maxlength="18" placeholder="9 to 18 digits"></label>
+              <label>IFSC <input name="ifsc" required maxlength="11" placeholder="HDFC0001234"></label>
+              <button>Link bank account</button>
+            </form>
+          </details>
+
+          <details class="disclosure" id="register-box">
+            <summary>Create a new user</summary>
+            <form id="register-form" class="stack">
+              <label>Full name <input name="name" required minlength="2" maxlength="50" placeholder="Meera Iyer"></label>
+              <label>Mobile number <input name="phone" required inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10 digits"></label>
+              <label>UPI handle (optional) <input name="upiHandle" maxlength="30" placeholder="meera"></label>
+              <label>Choose a UPI PIN <input name="pin" type="password" inputmode="numeric" autocomplete="off" pattern="[0-9]{4,6}" maxlength="6" required placeholder="4 to 6 digits"></label>
+              <button>Create user and wallet</button>
+            </form>
+          </details>
+
+          <details class="disclosure">
+            <summary>Link a card</summary>
+            <form id="link-card-form" class="stack">
+              <label>Network
+                <select name="network"><option>Visa</option><option>Mastercard</option><option>RuPay</option></select>
+              </label>
+              <label>Card number <input name="cardNumber" required inputmode="numeric" maxlength="19" placeholder="4111111111111111"></label>
+              <div class="pair">
+                <label>Expiry month <input name="expiryMonth" type="number" min="1" max="12" required placeholder="12"></label>
+                <label>Expiry year <input name="expiryYear" type="number" min="2000" max="2100" required placeholder="2029"></label>
+              </div>
+              <button>Link card</button>
+            </form>
+          </details>
+        </aside>
+
+        <div class="col-pay">
+          <form id="pay-form" class="panel">
+            <h2>Send money</h2>
+            <div class="pay-fields">
+              <label class="span-2">To (UPI ID)
+                <input name="receiverUpiId" list="payees" required placeholder="bob@miniupi" autocomplete="off">
+                <datalist id="payees"></datalist>
+              </label>
+              <label>Amount in rupees
+                <input name="amount" type="number" min="0.01" step="0.01" inputmode="decimal" required>
+              </label>
+              <label>Pay from
+                <select name="sourceId"></select>
+              </label>
+              <label>Note (optional)
+                <input name="note" maxlength="80" placeholder="Dinner split">
+              </label>
+              <label>UPI PIN
+                <input name="pin" type="password" inputmode="numeric" autocomplete="off" maxlength="6" required>
+              </label>
+            </div>
+            <div class="pay-actions">
+              <button class="primary" id="pay-button">Pay now</button>
+              <label class="inline">
+                <input type="checkbox" name="later"> Pay later, in
+                <input name="delaySeconds" type="number" min="2" max="600" value="10" class="tiny" aria-label="Seconds from now"> seconds
+              </label>
+              <button type="button" id="retry-button" hidden>Send the same request again</button>
+            </div>
+            <p class="hint">Every seeded user has the PIN 1234. Each payment carries a fresh Idempotency-Key;
+              "Send the same request again" reuses the last key, the way a phone retries after a timeout.</p>
+            <p class="form-message" id="pay-message" role="status"></p>
+          </form>
+
+          <section class="panel">
+            <div class="panel-head">
+              <h2>Activity</h2>
+              <span class="chip" id="history-source" title="Which database node answered this read"></span>
+            </div>
+            <ul id="history" class="plain-list history"></ul>
+            <button type="button" id="older-button" class="small" hidden>Show older payments</button>
+          </section>
+
+          <section class="panel" id="scheduled-panel" hidden>
+            <h2>Scheduled payments</h2>
+            <ul id="scheduled" class="plain-list scheduled"></ul>
+          </section>
+        </div>
+
+        <aside class="col-rail" aria-label="Request trace">
+          <h2>What just happened</h2>
+          <p class="hint">Every stop your last request made inside the system, in order.</p>
+          <div id="rail-meta" class="rail-meta"></div>
+          <ol id="rail" class="rail"></ol>
+
+          <h2 class="spaced">Notifications</h2>
+          <ul id="notifications" class="plain-list notifications"></ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================== Scenario lab ============================== -->
+    <section id="view-lab" class="view" hidden>
+      <div class="page-head">
+        <h1>Scenario lab</h1>
+        <p>Each scenario creates its own throwaway users, calls the real API from this browser, and checks the outcome.
+          Nothing here is mocked.</p>
+      </div>
+      <div class="lab-grid">
+        <div id="scenarios" class="scenarios"></div>
+        <aside class="console" aria-label="Scenario output">
+          <div class="console-head">
+            <h2 id="console-title">Pick a scenario</h2>
+            <span id="console-verdict" class="verdict"></span>
+          </div>
+          <ol id="console-log" class="console-log" aria-live="polite"></ol>
+          <div id="console-rail-box" hidden>
+            <h3>Inside the key request</h3>
+            <div id="console-rail-meta" class="rail-meta"></div>
+            <ol id="console-rail" class="rail"></ol>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============================== Live system ============================== -->
+    <section id="view-system" class="view" hidden>
+      <div class="page-head">
+        <h1>Live system</h1>
+        <p>The components a payment passes through, with their live counters. Break something on the right and watch
+          how the rest reacts.</p>
+      </div>
+      <div class="system-grid">
+        <div id="architecture" class="architecture"></div>
+        <aside class="controls">
+          <h2>Break things</h2>
+          <div id="chaos-controls" class="stack"></div>
+          <h2 class="spaced">What is plugged in</h2>
+          <dl id="plugged-in" class="plugged"></dl>
+        </aside>
+      </div>
+      <section class="panel feed-panel">
+        <div class="panel-head">
+          <h2>Live activity</h2>
+          <span class="hint">Newest first</span>
+        </div>
+        <ol id="feed" class="feed"></ol>
+      </section>
+    </section>
+
+    <!-- ============================== Ledger ============================== -->
+    <section id="view-ledger" class="view" hidden>
+      <div class="page-head">
+        <h1>Ledger</h1>
+        <p>Append-only, double-entry, hash-chained. Every rupee in every wallet is explained by the entries below.</p>
+      </div>
+      <div class="ledger-actions">
+        <button class="primary" id="verify-ledger">Audit the ledger</button>
+        <button id="tamper-ledger">Try to tamper with it</button>
+        <span id="ledger-source" class="chip"></span>
+      </div>
+      <div id="ledger-result" class="ledger-result" role="status"></div>
+      <div class="table-wrap">
+        <table class="ledger-table">
+          <thead>
+            <tr>
+              <th scope="col">Seq</th><th scope="col">Time</th><th scope="col">Transaction</th>
+              <th scope="col">Account</th><th scope="col">Entry</th><th scope="col" class="num">Amount</th>
+              <th scope="col" class="num">Balance after</th><th scope="col">Previous hash</th><th scope="col">Hash</th>
+            </tr>
+          </thead>
+          <tbody id="ledger-rows"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================== Design docs ============================== -->
+    <section id="view-design" class="view" hidden>
+      <div class="design-grid">
+        <nav id="doc-list" class="doc-list" aria-label="Design documents"></nav>
+        <article id="doc-body" class="doc-body"></article>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/js/main.js"></script>
+</body>
+</html>

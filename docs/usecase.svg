@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 770" width="1120" height="770" role="img" aria-labelledby="t d" font-family="IBM Plex Sans, Helvetica, Arial, sans-serif" font-size="13">
+<title id="t">Use-case diagram of the Mini UPI Wallet</title>
+<desc id="d">Actors: Payer, Payee, bank and card networks, notification providers, Scheduler and Operator. Use cases inside the system boundary, with include relationships.</desc>
+<defs><marker id="open" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto"><path d="M1 1 L9 5 L1 9" fill="none" stroke="#151a3d" stroke-width="1.3"/></marker></defs>
+<rect width="1120" height="770" fill="#ffffff"/>
+<rect x="200" y="24" width="670" height="726" fill="#f3f5fb" stroke="#151a3d" stroke-width="1.5"/>
+<text x="535" y="48" text-anchor="middle" font-size="15" font-weight="600" fill="#151a3d">Mini UPI Wallet</text>
+<line x1="98" y1="290" x2="232" y2="80" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="98" y1="290" x2="232" y2="150" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="98" y1="290" x2="232" y2="220" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="98" y1="290" x2="232" y2="290" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="98" y1="290" x2="232" y2="370" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="98" y1="290" x2="232" y2="450" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="98" y1="290" x2="232" y2="530" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="98" y1="560" x2="232" y2="530" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="98" y1="560" x2="232" y2="610" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="1022" y1="260" x2="838" y2="330" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="1022" y1="390" x2="838" y2="420" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="1022" y1="530" x2="838" y2="510" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="1022" y1="670" x2="838" y2="600" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="1022" y1="670" x2="838" y2="690" stroke="#151a3d" stroke-width="1.2"/>
+<line x1="468" y1="150" x2="602" y2="150" stroke="#151a3d" stroke-width="1.1" stroke-dasharray="6 4" marker-end="url(#open)"/>
+<text x="535" y="143" text-anchor="middle" font-size="11" fill="#4e5677" stroke="#f3f5fb" stroke-width="5" paint-order="stroke">«include»</text>
+<line x1="468" y1="370" x2="602" y2="150" stroke="#151a3d" stroke-width="1.1" stroke-dasharray="6 4" marker-end="url(#open)"/>
+<text x="575" y="198" text-anchor="middle" font-size="11" fill="#4e5677" stroke="#f3f5fb" stroke-width="5" paint-order="stroke">«include»</text>
+<line x1="468" y1="370" x2="602" y2="240" stroke="#151a3d" stroke-width="1.1" stroke-dasharray="6 4" marker-end="url(#open)"/>
+<text x="564" y="268" text-anchor="middle" font-size="11" fill="#4e5677" stroke="#f3f5fb" stroke-width="5" paint-order="stroke">«include»</text>
+<line x1="468" y1="290" x2="602" y2="330" stroke="#151a3d" stroke-width="1.1" stroke-dasharray="6 4" marker-end="url(#open)"/>
+<text x="508" y="294" text-anchor="middle" font-size="11" fill="#4e5677" stroke="#f3f5fb" stroke-width="5" paint-order="stroke">«include»</text>
+<line x1="468" y1="610" x2="602" y2="330" stroke="#151a3d" stroke-width="1.1" stroke-dasharray="6 4" marker-end="url(#open)"/>
+<text x="495" y="558" text-anchor="middle" font-size="11" fill="#4e5677" stroke="#f3f5fb" stroke-width="5" paint-order="stroke">«include»</text>
+<line x1="468" y1="370" x2="602" y2="420" stroke="#151a3d" stroke-width="1.1" stroke-dasharray="6 4" marker-end="url(#open)"/>
+<text x="548" y="392" text-anchor="middle" font-size="11" fill="#4e5677" stroke="#f3f5fb" stroke-width="5" paint-order="stroke">«include»</text>
+<line x1="602" y1="510" x2="460" y2="385" stroke="#151a3d" stroke-width="1.1" stroke-dasharray="6 4" marker-end="url(#open)"/>
+<text x="559" y="464" text-anchor="middle" font-size="11" fill="#4e5677" stroke="#f3f5fb" stroke-width="5" paint-order="stroke">«include»</text>
+<ellipse cx="350" cy="80" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="350" y="84.5" text-anchor="middle" fill="#151a3d">Register</text>
+<ellipse cx="350" cy="150" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="350" y="154.5" text-anchor="middle" fill="#151a3d">Sign in</text>
+<ellipse cx="350" cy="220" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="350" y="224.5" text-anchor="middle" fill="#151a3d">Link a bank account or card</text>
+<ellipse cx="350" cy="290" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="350" y="294.5" text-anchor="middle" fill="#151a3d">Add money to wallet</text>
+<ellipse cx="350" cy="370" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="350" y="374.5" text-anchor="middle" fill="#151a3d">Send money</text>
+<ellipse cx="350" cy="450" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="350" y="454.5" text-anchor="middle" fill="#151a3d">Schedule a payment</text>
+<ellipse cx="350" cy="530" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="350" y="534.5" text-anchor="middle" fill="#151a3d">View history and details</text>
+<ellipse cx="350" cy="610" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="350" y="614.5" text-anchor="middle" fill="#151a3d">Refund a payment</text>
+<ellipse cx="720" cy="150" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="720" y="154.5" text-anchor="middle" fill="#151a3d">Verify UPI PIN</text>
+<ellipse cx="720" cy="240" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="720" y="238" text-anchor="middle" fill="#151a3d">Validate payment</text><text x="720" y="253" text-anchor="middle" font-size="11" fill="#4e5677">limits and fraud rules</text>
+<ellipse cx="720" cy="330" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="720" y="334.5" text-anchor="middle" fill="#151a3d">Charge or refund bank / card</text>
+<ellipse cx="720" cy="420" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="720" y="424.5" text-anchor="middle" fill="#151a3d">Send notifications</text>
+<ellipse cx="720" cy="510" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="720" y="514.5" text-anchor="middle" fill="#151a3d">Execute scheduled payment</text>
+<ellipse cx="720" cy="600" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="720" y="604.5" text-anchor="middle" fill="#151a3d">Recover after a crash</text>
+<ellipse cx="720" cy="690" rx="118" ry="25" fill="#ffffff" stroke="#21309a" stroke-width="1.5"/>
+<text x="720" y="694.5" text-anchor="middle" fill="#151a3d">Audit the ledger</text>
+<g stroke="#151a3d" stroke-width="1.6" fill="none"><circle cx="80" cy="270" r="9" fill="#ffffff"/><path d="M80 279 V302 M65 289 H95 M80 302 L68 322 M80 302 L92 322"/></g>
+<text x="80" y="340" text-anchor="middle" font-weight="600" fill="#151a3d">Payer</text>
+<g stroke="#151a3d" stroke-width="1.6" fill="none"><circle cx="80" cy="540" r="9" fill="#ffffff"/><path d="M80 549 V572 M65 559 H95 M80 572 L68 592 M80 572 L92 592"/></g>
+<text x="80" y="610" text-anchor="middle" font-weight="600" fill="#151a3d">Payee</text>
+<g stroke="#151a3d" stroke-width="1.6" fill="none"><circle cx="1040" cy="240" r="9" fill="#ffffff"/><path d="M1040 249 V272 M1025 259 H1055 M1040 272 L1028 292 M1040 272 L1052 292"/></g>
+<text x="1040" y="310" text-anchor="middle" font-size="11" fill="#4e5677">«system»</text>
+<text x="1040" y="326" text-anchor="middle" font-weight="600" fill="#151a3d">Bank and card</text>
+<text x="1040" y="342" text-anchor="middle" font-weight="600" fill="#151a3d">networks</text>
+<g stroke="#151a3d" stroke-width="1.6" fill="none"><circle cx="1040" cy="370" r="9" fill="#ffffff"/><path d="M1040 379 V402 M1025 389 H1055 M1040 402 L1028 422 M1040 402 L1052 422"/></g>
+<text x="1040" y="440" text-anchor="middle" font-size="11" fill="#4e5677">«system»</text>
+<text x="1040" y="456" text-anchor="middle" font-weight="600" fill="#151a3d">Notification</text>
+<text x="1040" y="472" text-anchor="middle" font-weight="600" fill="#151a3d">providers</text>
+<g stroke="#151a3d" stroke-width="1.6" fill="none"><circle cx="1040" cy="510" r="9" fill="#ffffff"/><path d="M1040 519 V542 M1025 529 H1055 M1040 542 L1028 562 M1040 542 L1052 562"/></g>
+<text x="1040" y="580" text-anchor="middle" font-size="11" fill="#4e5677">«system»</text>
+<text x="1040" y="596" text-anchor="middle" font-weight="600" fill="#151a3d">Scheduler</text>
+<g stroke="#151a3d" stroke-width="1.6" fill="none"><circle cx="1040" cy="650" r="9" fill="#ffffff"/><path d="M1040 659 V682 M1025 669 H1055 M1040 682 L1028 702 M1040 682 L1052 702"/></g>
+<text x="1040" y="720" text-anchor="middle" font-weight="600" fill="#151a3d">Operator</text>
+</svg>
